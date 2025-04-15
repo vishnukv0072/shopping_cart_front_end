@@ -41,6 +41,14 @@ body {
 
 }
 
+.MuiSelect-select {
+    padding: 0 !important;
+    color: white !important;
+}
+.MuiTablePagination-select[aria-expanded="true"] {
+    border: 2px solid green;
+}
+
 .image-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 columns */

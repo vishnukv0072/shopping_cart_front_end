@@ -5,7 +5,9 @@ export async function getInterests() {
   return await res.json();
 }
 
-export async function getProducts(query) {
-  const res = await fetch(`${BASE_URL}/products/${query}`);
+export async function getProducts({query, sortOrder}) {
+  const url = `${BASE_URL}/products/${query}?`;
+  const sort = sortOrder && sortOrder !== "None" ? sortOrder : "";
+  const res = await fetch(`${url}sort_order=${sort}`);
   return await res.json();
 }

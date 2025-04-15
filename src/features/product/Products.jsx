@@ -18,7 +18,8 @@ function Products() {
 }
 
 export async function loader({params}) {
-  return await getProducts(params.productType);
+  const query = params.productType;
+  return await getProducts({query});
 }
 
 export default Products;

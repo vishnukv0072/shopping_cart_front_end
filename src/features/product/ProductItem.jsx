@@ -1,6 +1,7 @@
 import {Rating} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {convertCurrency} from "../../utils/helpers.js";
+import Button from "../../ui/Button.jsx";
 
 function ProductItem({item}) {
 
@@ -16,8 +17,8 @@ function ProductItem({item}) {
           </div>
           <p>{(convertCurrency(item.price))}</p>
           <div className="space-x-4">
-            <button className="bg-dark text-light p-3 rounded cursor-pointer">Add to cart</button>
-            <button className="bg-dark text-light p-3 rounded cursor-pointer">Buy now</button>
+            <Button type="dark">Add to cart</Button>
+            <Button type="dark">Buy now</Button>
           </div>
         </div>
       </div>

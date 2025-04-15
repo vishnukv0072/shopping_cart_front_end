@@ -1,4 +1,4 @@
-import {getCategories} from "../../services/apiProduct.js";
+import {getInterests} from "../../services/apiProduct.js";
 import Category from "../category/Category.jsx";
 import Welcome from "../../ui/Welcome.jsx";
 import {useLoaderData} from "react-router-dom";
@@ -19,7 +19,7 @@ function Home() {
 }
 
 export async function loader() {
-  return await getCategories();
+  return await getInterests();
 }
 
 export default Home;

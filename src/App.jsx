@@ -1,8 +1,8 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import AppLayout from "./ui/AppLayout.jsx"
-import Home, {loader as categoryLoader} from "./features/home/Home.jsx";
+import Home, {loader as interestsLoader} from "./features/home/Home.jsx";
 import Cart from "./features/cart/Cart.jsx";
-import Products from "./features/product/Products.jsx";
+import Products, {loader as productsLoader} from "./features/product/Products.jsx";
 import Error from "./ui/Error.jsx";
 import UserProfile from "./features/user/UserProfile.jsx";
 
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>,
-        loader: categoryLoader
+        loader: interestsLoader
       },
       {
         path: "/profile",
@@ -25,8 +25,9 @@ const router = createBrowserRouter([
         element: <Cart/>
       },
       {
-        path: "/:productType",
-        element: <Products/>
+        path: "/products/:productType",
+        element: <Products/>,
+        loader: productsLoader
       },
       {
         path: "/products/:productName",

@@ -10,30 +10,28 @@ function clipLong (input, length) {
   return clipped.length === input.length ? [clipped] : `${clipped}....`;
 } 
 
-function CategoryItem({item}) {
+function CategoryItem({category, images}) {
   return (
     <li>
-      <Link to={`/${item.name}`} >
-      <Card sx={{ maxWidth: 345, padding: 1 }}>
-        <CardActionArea>
-      <div title={item.name}>
-          <div className="image-box">
-            {item.image.map((img, i) => <img src={img} alt={item.name} key={i}/>)}
-          </div>
-      {/*  <p>{clipLong(item.name, 20)}</p>*/}
-
-          <CardContent>
-            <p className="min-h-[55px] text-center">{clipLong(item.name, 20)}</p>
-            {/*<Typography gutterBottom variant="h5" component="div">*/}
-            {/*  {item.name}*/}
-            {/*</Typography>*/}
-            {/*<Typography variant="body2" sx={{ color: 'text.secondary' }}>*/}
-            {/*  {item.name}*/}
-            {/*</Typography>*/}
-          </CardContent>
-          </div>
-        </CardActionArea>
-      </Card>
+      <Link to={`/products/${category}`}>
+        <Card sx={{maxWidth: 345, padding: 1}}>
+          <CardActionArea>
+            <div title={category}>
+              <div className="image-box">
+                {images.map((img, i) => <img src={img} alt={category} key={i}/>)}
+              </div>
+              <CardContent>
+                <p className="min-h-[55px] text-center">{clipLong(category, 20)}</p>
+                {/*<Typography gutterBottom variant="h5" component="div">*/}
+                {/*  {item.name}*/}
+                {/*</Typography>*/}
+                {/*<Typography variant="body2" sx={{ color: 'text.secondary' }}>*/}
+                {/*  {item.name}*/}
+                {/*</Typography>*/}
+              </CardContent>
+            </div>
+          </CardActionArea>
+        </Card>
       </Link>
     </li>
   );

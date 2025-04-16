@@ -18,7 +18,7 @@ function ProductItem({item}) {
             <Typography component="legend">{item.rating} ({item.reviews_count})</Typography>
           </div>
           <p>{(convertCurrency(item.price))}</p>
-          <div className="space-x-4 space-y-2 absolute bottom-0">
+          <div className="space-x-4 space-y-2 mt-6 lg:absolute lg:bottom-0 lg:mt-0">
             <Button type="dark">Buy now</Button>
             <Button type="dark">Add to cart</Button>
           </div>

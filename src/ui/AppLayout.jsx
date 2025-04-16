@@ -8,7 +8,7 @@ function AppLayout() {
   const isLoading = navigation.state === "loading";
   return (
     <div className="h-screen text-dark">
-      {isLoading && <Loader/>}
+      {isLoading || <Loader/>}
       <Header/>
       <main className="max-w-[95rem] mx-auto bg-light">
         <Outlet/>

@@ -37,8 +37,22 @@ body {
     /*height: 90px;*/
 }
 
-.category-card {
+/*#filter {*/
+/*    position: fixed;*/
+/*    top: -53px;*/
+/*}*/
 
+#draw {
+    display: flex;
+    justify-content: center;
+    height: 25px
+}
+
+#draw p {
+    background: red;
+    width: 100px;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
 }
 
 .MuiSelect-select {
@@ -65,8 +79,6 @@ body {
     object-fit: cover; /* Ensures the image fills the container while maintaining aspect ratio */
     border-radius: 8px;
 }
-
-
 
 .loader {
     width: 45px;

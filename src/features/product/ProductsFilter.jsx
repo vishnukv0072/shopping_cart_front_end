@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {MenuItem, Select, Checkbox, FormControlLabel, FormGroup} from '@mui/material';
+import {MenuItem, Select, Checkbox, FormControlLabel, FormGroup, Slider} from '@mui/material';
 import Button from "../../ui/Button.jsx";
+import Typography from "@mui/material/Typography";
 
 const ProductFilter = () => {
   const [sortValue, setSortValue] = useState('');
+  const [value, setValue] = useState([0, 300]);
   // const [filters, setFilters] = useState({
   //   category: false,
   //   priceRange: false,
@@ -20,6 +22,14 @@ const ProductFilter = () => {
   //     [event.target.name]: event.target.checked,
   //   });
   // };
+  const minDistance = 10
+  function handleChange(event, newValue, activeThumb) {
+    if (activeThumb === 0) {
+      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+    } else {
+      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+    }
+  }
 
   return (
     <div className="flex items-center gap-3 px-4 py-2 bg-[#1E293B] text-white rounded-lg shadow-lg">
@@ -40,14 +50,21 @@ const ProductFilter = () => {
           <MenuItem value="ratings">Ratings</MenuItem>
         </Select>
       </div>
-
-      <div className="flex items-center justify-around gap-3">
-        <label className="font-medium">Filters</label>
+      <div className="flex items-center justify-around gap-3 w-[100%]">
+        {/*<label className="font-medium w-10">Filters</label>*/}
+        <Typography id="range-slider" className="mb-0" gutterBottom>
+          Price range
+        </Typography>
+        <Slider
+          className="max-w-[70%]"
+          value={value}
+          onChange={handleChange}
+          valueLabelDisplay="auto"
+          aria-labelledby="range-slider"
+          // getAriaValueText={() => "dddd"}
+        />
         <Button type="light">Apply Filters</Button>
       </div>
-
-      {/* Apply Filter Button */}
-
     </div>
   );
 };

@@ -1,9 +1,13 @@
 import {Rating} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {convertCurrency} from "../../utils/helpers.js";
+// import {convertCurrency, formatCurrency} from "../../utils/helpers.js";
 import Button from "../../ui/Button.jsx";
 
 function ProductItem({item}) {
+  // async function getPrice(price) {
+  //   const converted = await convertCurrency(price);
+  //   return formatCurrency(converted);
+  // }
 
   return (
     <li>
@@ -17,7 +21,7 @@ function ProductItem({item}) {
             <Rating name="half-rating-read" value={item.rating} precision={0.5} readOnly/>
             <Typography component="legend">{item.rating} ({item.reviews_count})</Typography>
           </div>
-          <p>{(convertCurrency(item.price))}</p>
+          <p>{item.price}</p>
           <div className="space-x-4 space-y-2 mt-6 lg:absolute lg:bottom-0 lg:mt-0">
             <Button type="dark">Buy now</Button>
             <Button type="dark">Add to cart</Button>

@@ -1,5 +1,5 @@
 import Logo from "./Logo.jsx";
-import Search from "./Search.jsx";
+import Search from "../features/search/Search.jsx";
 import Navigation from "./Navigation.jsx";
 
 function Header() {

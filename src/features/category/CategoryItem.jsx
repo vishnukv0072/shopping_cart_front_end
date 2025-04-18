@@ -1,19 +1,20 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../search/SearchSlice.js";
 
-function clipLong (input, length) {
+function clipLong(input, length) {
   const clipped = input.split("").slice(0, length).join("");
   return clipped.length === input.length ? [clipped] : `${clipped}....`;
-} 
+}
 
 function CategoryItem({category, images}) {
+  const dispatch = useDispatch();
   return (
     <li>
-      <Link to={`/products/${category}`}>
+      <Link to={`/products/${category}`} onClick={() => setTimeout(() => dispatch(setLoading(true)), 50)}>
         <Card sx={{maxWidth: 345, padding: 1}}>
           <CardActionArea>
             <div title={category}>
@@ -22,12 +23,6 @@ function CategoryItem({category, images}) {
               </div>
               <CardContent>
                 <p className="min-h-[55px] text-center">{clipLong(category, 20)}</p>
-                {/*<Typography gutterBottom variant="h5" component="div">*/}
-                {/*  {item.name}*/}
-                {/*</Typography>*/}
-                {/*<Typography variant="body2" sx={{ color: 'text.secondary' }}>*/}
-                {/*  {item.name}*/}
-                {/*</Typography>*/}
               </CardContent>
             </div>
           </CardActionArea>

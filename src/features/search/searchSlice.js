@@ -62,7 +62,8 @@ export const {
 } = SearchSlice.actions;
 
 export default SearchSlice.reducer;
+
+export const getResults = store => store.search.results;
 export const getIsSearching = store => store.search.isLoading;
 export const getSortOrder = store => store.search.sortOrder;
-
 export const getMinMax = store => store.search.filters.price;

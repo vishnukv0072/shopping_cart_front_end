@@ -1,5 +1,5 @@
 import {useNavigation} from "react-router-dom";
-import {getIsSearching} from "../features/search/SearchSlice.js";
+import {getIsSearching} from "../features/search/searchSlice.js";
 import {useSelector} from "react-redux";
 
 function Loader() {

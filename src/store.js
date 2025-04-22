@@ -1,11 +1,15 @@
 import {configureStore} from "@reduxjs/toolkit";
 import userSlice from "./features/user/userSlice.jsx";
-import searchReducer from "./features/search/SearchSlice.js";
+import searchSlice from "./features/search/searchSlice.js";
+import cartSlice from "./features/cart/cartSlice.js";
+import footerSlice from "./features/otherSlices/footerSlice.js";
 
 const store = configureStore({
   reducer: {
     user: userSlice,
-    search: searchReducer
+    search: searchSlice,
+    footer: footerSlice,
+    cart: cartSlice
   }
 })
 

@@ -37,10 +37,38 @@ body {
     /*height: 90px;*/
 }
 
-/*#filter {*/
-/*    position: fixed;*/
-/*    top: -53px;*/
-/*}*/
+.cart-items-above {
+    bottom: 75px;
+    animation-name: up;
+    animation-duration: 0.1s;
+}
+
+@keyframes up {
+    from {
+        bottom: 1px;
+    }
+    to {
+        bottom: 75px;
+    }
+}
+
+.cart-items-below {
+    bottom: 1px;
+    /*background: white !important;*/
+    /*color: black !important;*/
+    animation-name: down;
+    animation-duration: 0.1s;
+}
+
+@keyframes down {
+    from {
+        bottom: 75px;
+    }
+    to {
+        bottom: 1px;
+    }
+}
+
 
 #draw {
     display: flex;
@@ -59,6 +87,7 @@ body {
     padding: 0 !important;
     color: white !important;
 }
+
 .MuiTablePagination-select[aria-expanded="true"] {
     border: 2px solid green;
 }

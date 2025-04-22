@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "../../ui/Button.jsx";
 import {formatCurrency} from "../../utils/helpers.js";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProducts, getMinMax, setOrder} from "../search/SearchSlice.js";
+import {fetchProducts, getMinMax, setOrder} from "../search/searchSlice.js";
 
 const ProductFilter = () => {
   const minDistance = 10

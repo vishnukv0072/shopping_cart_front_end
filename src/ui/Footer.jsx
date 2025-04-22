@@ -1,6 +1,18 @@
+import {useDispatch} from "react-redux";
+import {useEffect, useRef} from "react";
+import {setHeight} from "../features/otherSlices/footerSlice.js";
+
 function Footer() {
+  const footer = useRef(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const height = footer.current.getBoundingClientRect().height;
+    dispatch(setHeight(height));
+  }, [dispatch]);
+
   return (
-    <footer className="bg-slate-900 text-slate-300 py-10 px-6">
+    <footer className="bg-slate-900 text-slate-300 pt-10 px-6" ref={footer}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
         <div>
@@ -45,7 +57,7 @@ function Footer() {
 
       </div>
 
-      <div className="mt-10 border-t border-slate-800 pt-4 text-center text-xs text-slate-500">
+      <div className="mt-10 border-t border-slate-800 py-8.5 text-center text-xs text-slate-500">
         &copy; 2025 Nexave. All rights reserved.
       </div>
     </footer>

@@ -4,13 +4,18 @@ import {Pagination} from "@mui/material";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {clearAll, fetchProducts, setLoading, setQuery,} from "../search/SearchSlice.js";
+import {clearAll, fetchProducts, getResults, setLoading, setQuery,} from "../search/searchSlice.js";
+import CartWidget from "../cart/CartWidget.jsx";
+import {getCartItemsCount} from "../cart/cartSlice.js";
 
 function Products() {
   const params = useParams();
   const search = useSelector(store => store.search)
   const dispatch = useDispatch();
-  const results = useSelector(store => store.search.results);
+  const results = useSelector(getResults);
+  const cartItemsCount = useSelector(getCartItemsCount);
+  //eslint-disable-next-line
+  debugger
 
   useEffect(() => {
     if (search.query !== params.productType) {
@@ -24,12 +29,13 @@ function Products() {
 
   return (
     <div className="pb-5">
-      <ProductsFilter/>
+      {results.length > 0 && <ProductsFilter/>}
       <div className="p-5">
         <ul className="space-y-[30px]">
           {results.map(item => <ProductItem item={item} key={item.id}/>)}
         </ul>
       </div>
+      {cartItemsCount > 0 && <CartWidget cartItemsCount={cartItemsCount} />}
       <Pagination count={10} className="flex justify-center" onClick={(e,v,f) => console.log(e,v,f)} />
     </div>
   );

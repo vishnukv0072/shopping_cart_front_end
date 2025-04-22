@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../search/SearchSlice.js";
+import {setLoading} from "../search/searchSlice.js";
 
 function clipLong(input, length) {
   const clipped = input.split("").slice(0, length).join("");

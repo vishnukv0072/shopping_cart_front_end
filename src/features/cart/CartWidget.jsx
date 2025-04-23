@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {getHeight} from "../otherSlices/footerSlice.js";
+import {Link} from "react-router-dom"
 
 function CartWidget({cartItemsCount}) {
   const cart = useRef(null);
@@ -16,12 +17,14 @@ function CartWidget({cartItemsCount}) {
     scrolledHeight.current = window.pageYOffset + cartPosReference.current.getBoundingClientRect().bottom;
     // if (scrolledHeight.current < distanceToWidget.current && !cart.current.classList.contains("cart-items-above")) {
     if (scrolledHeight.current < distanceToWidget.current) {
+      console.log("above")
         cart.current.classList.remove("cart-items-below");
         cart.current.classList.add("cart-items-above");
         setCartIsAbove(true);
     }
     // if (scrolledHeight.current > distanceToWidget.current && !cart.current.classList.contains("cart-items-below")) {
     if (scrolledHeight.current > distanceToWidget.current) {
+      console.log("below")
       cart.current.classList.remove("cart-items-above");
       cart.current.classList.add("cart-items-below");
       setCartIsAbove(false);
@@ -39,7 +42,7 @@ function CartWidget({cartItemsCount}) {
 
 
   return (
-    <>
+    <Link to="/cart">
       <div
         className={`fixed cart-items-above right-8 ${cartIsAbove ? 'bg-dark text-light' : 'bg-light text-dark'} rounded-full w-20 h-20 cursor-pointer`}
         id="cart-items" ref={cart}>
@@ -50,7 +53,7 @@ function CartWidget({cartItemsCount}) {
         </div>
       </div>
       <div className="fixed cart-items-above right-8" ref={cartPosReference}></div>
-    </>
+    </Link>
   );
 }
 

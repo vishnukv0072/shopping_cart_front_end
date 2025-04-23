@@ -14,8 +14,7 @@ function Products() {
   const dispatch = useDispatch();
   const results = useSelector(getResults);
   const cartItemsCount = useSelector(getCartItemsCount);
-  //eslint-disable-next-line
-  debugger
+
 
   useEffect(() => {
     if (search.query !== params.productType) {

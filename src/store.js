@@ -6,10 +6,10 @@ import footerSlice from "./features/otherSlices/footerSlice.js";
 
 const store = configureStore({
   reducer: {
+    cart: cartSlice,
     user: userSlice,
     search: searchSlice,
-    footer: footerSlice,
-    cart: cartSlice
+    footer: footerSlice
   }
 })
 

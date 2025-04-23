@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 // import {convertCurrency, formatCurrency} from "../../utils/helpers.js";
 import Button from "../../ui/Button.jsx";
 import {useDispatch} from "react-redux";
-import {addItem} from "../cart/cartSlice.js";
+import {addItem, removeItem} from "../cart/cartSlice.js";
 import {useState} from "react";
 
 // async function getPrice(price) {
@@ -15,9 +15,14 @@ function ProductItem({item}) {
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
 
-  function addToCart() {
-    setAdded(true);
-    dispatch(addItem(item));
+  async function addToCart() {
+    const response = await dispatch(addItem(item));
+    if (!response.error) setAdded(true);
+  }
+
+  function removeFromCart() {
+    setAdded(false);
+    dispatch(removeItem(item));
   }
 
   return (
@@ -36,7 +41,7 @@ function ProductItem({item}) {
           <div className="space-y-2 mt-6 lg:absolute lg:bottom-0 lg:mt-0">
             {
               added ? (
-                <Button type="dark">Remove item</Button>
+                <Button type="remove" onClick={removeFromCart}>Remove item</Button>
               ) : (
                 <Button type="dark" onClick={addToCart}>Add to cart</Button>
               )

@@ -6,7 +6,7 @@ import {formatCurrency} from "../../utils/helpers.js";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProducts, getMinMax, setOrder} from "../search/searchSlice.js";
 
-const ProductFilter = () => {
+const ProductFilter = ({currencyValue}) => {
   const minDistance = 10
   const minMax = useSelector(getMinMax);
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const ProductFilter = () => {
     setSortValue(event.target.value);
     dispatch(setOrder(event.target.value));
     dispatch(fetchProducts());
-  };
+  }
 
   function handleChange(event, newValue, activeThumb) {
     if (activeThumb === 0) {
@@ -62,7 +62,7 @@ const ProductFilter = () => {
         />
         <Button type="light"><span className="font-semibold">Apply Filters</span></Button>
       </div>
-      <div className="col-span-10 md:text-end">{formatCurrency(value[0])} - {formatCurrency(value[1])}</div>
+      <div className="col-span-10 md:text-end">{formatCurrency((value[0] * currencyValue).toFixed(2))} - {formatCurrency((value[1] * currencyValue).toFixed(2))}</div>
     </div>);
 };
 

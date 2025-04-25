@@ -1,32 +1,37 @@
 import {useSelector} from "react-redux";
-import {clearCart, fetchItems, getCartItems} from "./cartSlice.js";
+import {clearCart, fetchItems, getCartItemIds} from "./cartSlice.js";
 import CartItem from "./CartItem.jsx";
 import EmptyCart from "./EmptyCart.jsx";
 import Button from "../../ui/Button.jsx";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
+import CartTotal from "./CartTotal.jsx";
 
 function Cart() {
-  const items = useSelector(getCartItems);
+  const itemIds = useSelector(getCartItemIds);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!items.length) dispatch(fetchItems());
+    if (!itemIds.length) dispatch(fetchItems());
   }, []);
 
   function clearFromCart() {
     dispatch(clearCart());
   }
 
-  if (items.length === 0) return <EmptyCart/>
+  if (itemIds.length === 0) return <EmptyCart/>
   return (
-    <div>
+    <div className="py-8 px-4">
       <ul>
         {
-          items.map(item => <CartItem item={item} key={item.id}/>)
+          itemIds.map(id => <CartItem id={id} key={id}/>)
         }
       </ul>
-      <Button type="remove" onClick={clearFromCart}>Clear cart</Button>
+      <div className="flex justify-center space-x-5 pt-8">
+        <Button type="remove" onClick={clearFromCart}>Clear cart</Button>
+        <Button type="dark">Checkout</Button>
+      </div>
+      <CartTotal/>
     </div>
   );
 }

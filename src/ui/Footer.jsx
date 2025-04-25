@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import {useEffect, useRef} from "react";
-import {setHeight} from "../features/otherSlices/footerSlice.js";
+import {setFooterHeight} from "../features/otherSlices/miscSlice.js";
 
 function Footer() {
   const footer = useRef(null);
@@ -8,7 +8,7 @@ function Footer() {
 
   useEffect(() => {
     const height = footer.current.getBoundingClientRect().height;
-    dispatch(setHeight(height));
+    dispatch(setFooterHeight(height));
   }, [dispatch]);
 
   return (

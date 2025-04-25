@@ -1,19 +1,14 @@
 import {Rating} from "@mui/material";
 import Typography from "@mui/material/Typography";
-// import {convertCurrency, formatCurrency} from "../../utils/helpers.js";
 import Button from "../../ui/Button.jsx";
 import {useDispatch} from "react-redux";
 import {addItem, removeItem} from "../cart/cartSlice.js";
 import {useState} from "react";
+import {formatCurrency} from "../../utils/helpers.js";
 
-// async function getPrice(price) {
-//   const converted = await convertCurrency(price);
-//   return formatCurrency(converted);
-// }
-
-function ProductItem({item}) {
+function ProductItem({item, currencyValue, cartItemIds}) {
   const dispatch = useDispatch();
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(cartItemIds.includes(item.id));
 
   async function addToCart() {
     const response = await dispatch(addItem(item));
@@ -37,7 +32,7 @@ function ProductItem({item}) {
             <Rating name="half-rating-read" value={item.rating} precision={0.5} readOnly/>
             <Typography component="legend">{item.rating} ({item.reviews_count})</Typography>
           </div>
-          <p>{item.price}</p>
+          <p>{formatCurrency((currencyValue * item.price).toFixed(2))}</p>
           <div className="space-y-2 mt-6 lg:absolute lg:bottom-0 lg:mt-0">
             {
               added ? (

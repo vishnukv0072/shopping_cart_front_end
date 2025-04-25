@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {getProducts} from "../../services/apiProduct.js";
+import {fillCartFromResponse} from "../cart/cartSlice.js";
 
 const initialState = {
   query: "",
@@ -16,7 +17,9 @@ export const fetchProducts = createAsyncThunk("search/fetchProducts",
     const state = thunkAPI.getState();
     const query = state.search.query;
     const sortOrder = state.search.sortOrder;
-    return await getProducts({query, sortOrder});
+    const data = await getProducts({query, sortOrder});
+    thunkAPI.dispatch(fillCartFromResponse(data.cartItems))
+    return data;
   });
 
 const SearchSlice = createSlice({

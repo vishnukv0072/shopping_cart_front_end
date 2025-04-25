@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
-import {getHeight} from "../otherSlices/footerSlice.js";
+import {getFooterHeight} from "../otherSlices/miscSlice.js";
 import {Link} from "react-router-dom"
 
 function CartWidget({cartItemsCount}) {
@@ -8,7 +8,7 @@ function CartWidget({cartItemsCount}) {
   const cartPosReference = useRef(null);
 
   const totalHeight = useRef(null);
-  const footerHeight = useSelector(getHeight);
+  const footerHeight = useSelector(getFooterHeight);
   const scrolledHeight = useRef(null);
   const distanceToWidget = useRef(null);
   const [cartIsAbove, setCartIsAbove] = useState(scrolledHeight.current ? scrolledHeight.current < distanceToWidget.current : true);
@@ -32,15 +32,17 @@ function CartWidget({cartItemsCount}) {
   }
 
   useEffect(() => {
-    totalHeight.current = document.body.scrollHeight;
-    distanceToWidget.current = totalHeight.current - footerHeight;
-    scrolledHeight.current = window.pageYOffset + cartPosReference.current.getBoundingClientRect().bottom;
-    cartIcon()
-    document.addEventListener("scroll", cartIcon);
-    return () => document.removeEventListener("scroll", cartIcon);
+    if (cartItemsCount > 0) {
+      totalHeight.current = document.body.scrollHeight;
+      distanceToWidget.current = totalHeight.current - footerHeight;
+      scrolledHeight.current = window.pageYOffset + cartPosReference.current.getBoundingClientRect().bottom;
+      cartIcon()
+      document.addEventListener("scroll", cartIcon);
+      return () => document.removeEventListener("scroll", cartIcon);
+    }
   }, []);
 
-
+  if (cartItemsCount === 0) return null;
   return (
     <Link to="/cart">
       <div

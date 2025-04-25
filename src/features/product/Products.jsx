@@ -6,7 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {clearAll, fetchProducts, getResults, setLoading, setQuery,} from "../search/searchSlice.js";
 import CartWidget from "../cart/CartWidget.jsx";
-import {getCartItemsCount} from "../cart/cartSlice.js";
+import {getCartItemIds, getCartItemsCount} from "../cart/cartSlice.js";
+import {getCurrencyValue} from "../otherSlices/miscSlice.js";
 
 function Products() {
   const params = useParams();
@@ -14,6 +15,8 @@ function Products() {
   const dispatch = useDispatch();
   const results = useSelector(getResults);
   const cartItemsCount = useSelector(getCartItemsCount);
+  const cartItemIds = useSelector(getCartItemIds);
+  const currencyValue = useSelector(getCurrencyValue);
 
 
   useEffect(() => {
@@ -28,13 +31,13 @@ function Products() {
 
   return (
     <div className="pb-5">
-      {results.length > 0 && <ProductsFilter/>}
+      {results.length > 0 && <ProductsFilter currencyValue={currencyValue}/>}
       <div className="p-5">
         <ul className="space-y-[30px]">
-          {results.map(item => <ProductItem item={item} key={item.id}/>)}
+          {results.map(item => <ProductItem item={item} currencyValue={currencyValue} cartItemIds={cartItemIds} key={item.id}/>)}
         </ul>
       </div>
-      {cartItemsCount > 0 && <CartWidget cartItemsCount={cartItemsCount} />}
+      <CartWidget cartItemsCount={cartItemsCount} />
       <Pagination count={10} className="flex justify-center" onClick={(e,v,f) => console.log(e,v,f)} />
     </div>
   );

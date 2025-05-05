@@ -6,10 +6,12 @@ import Button from "../../ui/Button.jsx";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import CartTotal from "./CartTotal.jsx";
+import {getCurrencyValue} from "../otherSlices/miscSlice.js";
 
 function Cart() {
   const itemIds = useSelector(getCartItemIds);
   const dispatch = useDispatch();
+  const currencyValue = useSelector(getCurrencyValue);
 
   useEffect(() => {
     if (!itemIds.length) dispatch(fetchItems());
@@ -22,16 +24,16 @@ function Cart() {
   if (itemIds.length === 0) return <EmptyCart/>
   return (
     <div className="py-8 px-4">
-      <ul>
+      <CartTotal currencyValue={currencyValue}/>
+      <ul className="pt-4">
         {
-          itemIds.map(id => <CartItem id={id} key={id}/>)
+          itemIds.map(id => <CartItem id={id} key={id} currencyValue={currencyValue}/>)
         }
       </ul>
       <div className="flex justify-center space-x-5 pt-8">
         <Button type="remove" onClick={clearFromCart}>Clear cart</Button>
         <Button type="dark">Checkout</Button>
       </div>
-      <CartTotal/>
     </div>
   );
 }

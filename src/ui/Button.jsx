@@ -1,5 +1,5 @@
 function Button({children, type, onClick}) {
-  const base = "rounded cursor-pointer p-3 ";
+  const base = "rounded cursor-pointer p-3 h-[50px] ";
   const className = {
     dark: base + "bg-dark text-light",
     light: base + "bg-light text-dark",

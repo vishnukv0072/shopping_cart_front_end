@@ -42,7 +42,7 @@ function CartTotal({currencyValue}) {
     <div className="flex justify-end sticky top-0">
       {/*DELETE ZOOM IF TOO SLOW*/}
       <Zoom in={inZoom}>
-      <p className="font-semibold inline bg-dark text-light px-4 py-2 rounded">
+      <p className="font-semibold inline bg-teal-700 text-light px-4 py-2 rounded">
         Total cart price: {formatCurrency((cartTotal * currencyValue).toFixed(2))}
       </p>
     </Zoom>

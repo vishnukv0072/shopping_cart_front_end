@@ -4,8 +4,6 @@ import {increaseItemQuantity, decreaseItemQuantity, removeItem, getCartItemById}
 import {formatCurrency} from "../../utils/helpers.js";
 
 function CartItem({id, currencyValue}) {
-  //eslint-disable-next-line
-  debugger
   const dispatch = useDispatch();
   const item = useSelector(getCartItemById(id));
   const price = item.quantity * currencyValue * item.unitPrice;

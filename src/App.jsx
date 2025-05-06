@@ -28,10 +28,6 @@ const router = createBrowserRouter([
         path: "/products/:productType",
         element: <Products/>,
         // loader: productsLoader
-      },
-      {
-        path: "/products/:productName",
-        element: <Products/>
       }
     ]
   }

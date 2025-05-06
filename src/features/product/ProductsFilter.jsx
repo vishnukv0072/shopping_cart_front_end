@@ -4,32 +4,34 @@ import Typography from "@mui/material/Typography";
 import Button from "../../ui/Button.jsx";
 import {formatCurrency} from "../../utils/helpers.js";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProducts, getMinMax, setOrder} from "../search/searchSlice.js";
+import {fetchProducts, getMinMax, setOffset, setOrder} from "../search/searchSlice.js";
 
 const ProductFilter = ({currencyValue}) => {
-  const minDistance = 10
   const minMax = useSelector(getMinMax);
   const dispatch = useDispatch();
   const [sortValue, setSortValue] = useState('');
+  const minDistance = (minMax[1] * currencyValue - minMax[0] * currencyValue) * 0.1;
   const [value, setValue] = useState([]);
 
-  useEffect(() => {
-    setValue(minMax);
-  }, [minMax]);
-
-  function handleSortChange(event) {
-    setSortValue(event.target.value);
-    dispatch(setOrder(event.target.value));
-    dispatch(fetchProducts());
-  }
-
-  function handleChange(event, newValue, activeThumb) {
+  const handleChange = (event, newValue, activeThumb) => {
     if (activeThumb === 0) {
       setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
     } else {
       setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
     }
+  };
+
+  useEffect(() => {
+    setValue(minMax.map(v => Number((v * currencyValue).toFixed(2))));
+  }, [minMax]);
+
+  function handleSortChange(event) {
+    setSortValue(event.target.value);
+    dispatch(setOrder(event.target.value));
+    dispatch(setOffset(0));
+    dispatch(fetchProducts());
   }
+
 
   return (<div className="grid grid-cols-12 px-5 py-1 bg-[#1E293B] text-white rounded-lg shadow-lg sticky top-0 z-9">
       <div className="flex items-center gap-2 col-span-12 sm:col-span-6 md:col-span-5 lg:col-span-3">
@@ -58,11 +60,13 @@ const ProductFilter = ({currencyValue}) => {
           value={value}
           onChange={handleChange}
           valueLabelDisplay="off"
-          aria-labelledby="range-slider"
+          disableSwap
+          min={Number((minMax[0] * currencyValue).toFixed(2))}
+          max={Number((minMax[1] * currencyValue).toFixed(2))}
         />
         <Button type="light"><span className="font-semibold">Apply Filters</span></Button>
       </div>
-      <div className="col-span-10 md:text-end">{formatCurrency((value[0] * currencyValue).toFixed(2))} - {formatCurrency((value[1] * currencyValue).toFixed(2))}</div>
+      <div className="col-span-10 md:text-end">{formatCurrency(value[0])} - {formatCurrency(value[1])}</div>
     </div>);
 };
 

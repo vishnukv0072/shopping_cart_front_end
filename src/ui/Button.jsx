@@ -3,7 +3,7 @@ function Button({children, type, onClick}) {
   const className = {
     dark: base + "bg-dark text-light",
     light: base + "bg-light text-dark",
-    remove: base + "bg-red-700 text-light"
+    remove: base + "border border-slate-500 hover:border-red-200 hover:bg-red-800 hover:text-white"
   };
   return <button className={className[type]} onClick={onClick}>{children}</button>;
 }

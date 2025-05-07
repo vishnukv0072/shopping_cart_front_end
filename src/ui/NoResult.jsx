@@ -5,7 +5,7 @@ import {getSearchQuery} from "../features/search/searchSlice.js";
 function NoResult() {
   const product = useSelector(getSearchQuery);
   useEffect(() => {
-    const element = document.getElementsByTagName("main")[0];
+    const element = document.getElementById("main-container");
     element.classList.remove("bg-light");
     element.classList.add("bg-white");
 

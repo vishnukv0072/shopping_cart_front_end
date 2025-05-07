@@ -16,7 +16,7 @@ function AppLayout() {
     <div className="h-screen text-dark">
       <Loader/>
       <Header/>
-      <main className="max-w-[95rem] mx-auto bg-light min-h-[54.8%]">
+      <main className="max-w-[95rem] mx-auto bg-light min-h-[54.8%]" id="main-container">
         <Outlet/>
       </main>
       <Footer/>
